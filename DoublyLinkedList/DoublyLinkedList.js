@@ -1,0 +1,116 @@
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    print() {
+        let str = '';
+        let node = this.head;
+        for (let i = 0; i < this.length; i++) {
+            let temp = node.val;
+            str = str + temp;
+            if (node.next) {
+                node = node.next;
+                str = str + '<--->'
+            }
+        }
+        console.log(str);
+    }
+
+    push(val) {
+        let newNode = new Node(val);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        } else {
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+        }
+        this.length++;
+    }
+
+    pop() {
+        if (!this.head) return null;
+        let removedTail = this.tail;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            let newTail = this.tail.prev;
+            newTail.next = null
+            this.tail = newTail
+            this.length--;
+            removedTail.prev = null;
+        }
+        return removedTail;
+    }
+
+    shift() {
+        let removedHead = this.head;
+        if(!this.head) return undefined;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = removedHead.next;
+            this.head.prev = null;
+            removedHead.next = null;
+        }
+        this.length--;
+        return removedHead;
+    }
+
+    unshift(val) {
+        let newNode = new Node(val);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        } else {
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode
+        }
+        this.length++;
+    }
+
+    get(index) {
+        if(!this.head) return null;
+        if(index < 0 || index >= this.length) return undefined;
+        let mid = Math.floor((0 + this.length)/2);
+        let node;
+        if(index <= mid) {
+            node = this.head;
+            for(let i = 0; i < index; i++) {
+                node = node.next;
+            }
+        } else {
+            node = this.tail;
+            for(let i = this.length - 1; i > index; i--) {
+                node = node.prev;
+            }
+        }
+
+        return node;
+    }
+}
+
+let list = new DoublyLinkedList();
+list.push('hi');
+list.push('hello');
+list.push('world');
+list.push('how');
+list.push('are');
+list.push('you');
+
+console.log(list);
