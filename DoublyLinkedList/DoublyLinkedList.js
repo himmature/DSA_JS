@@ -150,14 +150,32 @@ class DoublyLinkedList {
         }   
         return false;
     }
+    reverse() {
+        if(!this.length) return undefined;
+        if(this.length === 1) return this;
+        let newTail = this.head;
+        let newHead = this.tail;
+        let node = this.head;
+        for(let i = 0; i < this.length; i++) {
+            let nextNode = node.next;
+            let prevNode = node.prev;
+            node.next = prevNode;
+            node.prev = nextNode;
+            this.tail = node;
+            node = nextNode;
+        } 
+        this.tail = newTail;
+        this.head = newHead;
+        return this;
+    }
 }
 
 let list = new DoublyLinkedList();
-list.push('hi');
-list.push('hello');
-list.push('world');
-list.push('how');
-list.push('are');
-list.push('you');
+list.push('1');
+list.push('2');
+list.push('3');
+list.push('4');
+list.push('5');
+list.push('6');
 
 console.log(list);
