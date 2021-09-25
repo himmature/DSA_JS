@@ -55,6 +55,22 @@ class BinarySearchTree {
         }
         return checkContains(val)
     }
+
+    traverse_BFS() {
+        if(!this.root) return undefined;
+        let queue = [];
+        let finalList = [];
+        queue.push(this.root);
+        const traverseTree = () => {
+            let node = queue.shift();
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+            finalList.push(node);
+            if(queue.length) return traverseTree();
+            else return finalList;
+        }        
+        return traverseTree();
+    }
 }
 
 const tree = new BinarySearchTree();
@@ -63,3 +79,4 @@ tree.insert(6);
 tree.insert(7);
 tree.insert(1);
 tree.insert(3);
+tree.insert(0);
