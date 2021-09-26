@@ -69,6 +69,34 @@ class BinarySearchTree {
         }
         return finalList;
     }
+
+    traverse_DFS_preOrder() {
+        if(!this.root) return undefined;
+        let finalList = [];
+        let stack = [];
+        stack.push(this.root);
+        while(stack.length){
+            const node = stack.pop();
+            finalList.push(node);
+            if(node.right) stack.push(node.right);
+            if(node.left) stack.push(node.left);
+        }
+        return finalList;
+    }
+
+    traverse_DFS_postOrder() {
+        if(!this.root) return undefined;
+        let finalList = [];
+        let stack = [];
+        stack.push(this.root);
+        while(stack.length){
+            const node = stack.pop();
+            finalList.unshift(node);
+            if(node.left) stack.push(node.left);
+            if(node.right) stack.push(node.right);
+        }
+        return finalList;
+    }       
 }
 
 const tree = new BinarySearchTree();
@@ -79,3 +107,17 @@ tree.insert(1);
 tree.insert(3);
 tree.insert(8);
 tree.insert(0);
+
+//     6
+//   1   7
+// 0   3   8
+
+// preOrder ----> node left right
+// 6,1,0,3,7,8
+
+// postOrder  ---> left right node
+// 0,3,1,8,7,6
+
+// inOrder ---> left node right
+// 0,1,3,6,7,8
+// side effect: outputs a sorted list of nodes in ascending order

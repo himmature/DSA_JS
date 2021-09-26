@@ -136,3 +136,4 @@ tree.insert(5);
 
 // inOrder ---> left node right
 // 0,1,3,6,7
+// side effect: outputs a sorted list of nodes in ascending order
