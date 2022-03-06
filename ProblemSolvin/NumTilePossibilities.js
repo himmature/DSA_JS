@@ -1,14 +1,16 @@
 var numTilePossibilities = function(tiles) {
     const result = new Set();
-    function exec(tiles, str=[]) {
-        if(!tiles.length) return;
-        tiles.forEach((item, index) => {
-            str.push(item);
-            result.add(str.join(''));
-            exec(tiles.slice(index + 1), str);
-        })
+    function backtrack(str, temp) {
+        for(let i = 0; i < str.length; i++) {
+            if(!str) return;
+            temp.push(str[i]);
+            result.add(temp.join(''));
+            backtrack(str.replace(str[i], ''), temp);
+            temp.pop();
+        }
     }
-    exec(tiles.split(''));
+    backtrack(tiles, [])
+    return result.size;
 };
 
 const tiles = 'AAB';
