@@ -10,6 +10,7 @@ var numTilePossibilities = function(tiles) {
         }
     }
     backtrack(tiles, [])
+    console.log(result);
     return result.size;
 };
 
